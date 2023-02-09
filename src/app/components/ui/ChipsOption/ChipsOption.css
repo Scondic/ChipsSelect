@@ -1,0 +1,9 @@
+.ChipsSelect__option {
+  padding: 6px 0 8px 9px;
+
+  border-bottom: 1px solid var(--ui-gray-50);
+}
+
+.ChipsSelect__option-text {
+  color: var(--ui-gray-300);
+}

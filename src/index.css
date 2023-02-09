@@ -1,0 +1,50 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+
+  --ui-padding: 20px;
+  --ui-margin: 20px;
+  --ui-content-width: 340px;
+
+  --ui-white: #ffffff;
+  --ui-gray-50: #f1f1f1;
+  --ui-gray-100: #dce1e6;
+  --ui-gray-200: #838e9a;
+  --ui-gray-300: #1a1a1a;
+  --ui-blue-50: #e5ebf1;
+  --ui-blue-100: #346297;
+
+  --ui-border__size: 8px;
+
+  --ui-text__small: 13px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  background-color: var(--ui-gray-50);
+}
+
+.Content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 340px;
+  margin: 0 auto;
+  padding: var(--ui-padding);
+
+  border-radius: 8px;
+  background-color: var(--ui-white);
+}
