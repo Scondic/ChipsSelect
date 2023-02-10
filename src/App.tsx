@@ -7,6 +7,7 @@ const App = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
 
   const languageChipsProps = {
+    sort: "username",
     selected: selectedLanguage,
     setSelected: setSelectedLanguage,
     options: language,

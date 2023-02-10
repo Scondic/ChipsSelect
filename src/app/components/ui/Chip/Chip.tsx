@@ -5,15 +5,16 @@ import { Times } from "@/components";
 import "./Chip.css";
 
 export interface ChipsProps {
+  id: number;
   text: string;
-  onClick: (event: any) => void;
+  onClick: (id: number) => void;
 }
 
-export const Chip = ({ text, onClick }: PropsWithChildren<ChipsProps>) => {
+export const Chip = ({ id, text, onClick }: PropsWithChildren<ChipsProps>) => {
   return (
-    <span className={"Chip"} onClick={onClick}>
+    <span className={"Chip"} onClick={() => onClick(id)}>
       <span className={"Chip__text"}>{text}</span>
-      <span className={"Chip__action"}>{<Times />}</span>
+      <span className={"Chip__action"}>{<Times />} </span>
     </span>
   );
 };

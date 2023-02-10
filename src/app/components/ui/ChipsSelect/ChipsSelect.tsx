@@ -1,11 +1,12 @@
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { PropsWithChildren, useRef, useState } from "react";
 
-import { useSorting } from "@/hooks/useSorting";
 import { AngleDown, Chip, ChipsInput, ChipsOption } from "@/components";
+import { useKeyPress, useSorting } from "@/hooks";
 
 import "./ChipsSelect.css";
 
 export interface ChipsSelectProps {
+  sort: string;
   selected: any;
   setSelected: (prev: any) => void;
   options: any;
@@ -14,6 +15,7 @@ export interface ChipsSelectProps {
 }
 
 export const ChipsSelect = ({
+  sort,
   selected,
   setSelected,
   options,
@@ -21,9 +23,10 @@ export const ChipsSelect = ({
   placeholder,
 }: PropsWithChildren<ChipsSelectProps>) => {
   const chipsInputRef = useRef<HTMLInputElement>(null);
+  const chipsOptionsRef = useRef<HTMLDivElement>(null);
   const [isChipsInputFocused, setIsChipsInputFocused] = useState(false);
   const [chipsInputValue, setChipsInputValue] = useState("");
-  const { sortedOptions } = useSorting(options, chipsInputValue);
+  const { sortedOptions } = useSorting(options, sort, chipsInputValue);
 
   const onHandleChipsSelectClick = () => {
     if (chipsInputRef.current) {
@@ -32,58 +35,46 @@ export const ChipsSelect = ({
     }
   };
 
-  const onHandleChipsOptionClick = (event: any) => {
-    let selectedLanguage = options.filter(
-      (element: any) => element.name === event.target.outerText
-    );
-    let language = options.filter(
-      (element: any) => element.name !== event.target.outerText
-    );
-
-    setOptions([...language]);
-    setSelected((prev: any) => [...prev, ...selectedLanguage]);
-
+  const onHandleChipsOptionClick = (id: number) => {
+    // TODO: Костыль, но зато быстрый.
+    // Вызов обновления стейта с языками
+    chipsInputRef.current!.value = " ";
     chipsInputRef.current!.value = "";
+
+    const index = options.findIndex((elem: any) => elem.id === id);
+
+    const before = options.slice(0, index);
+    const after = options.slice(index + 1);
+
+    setOptions([...before, ...after]);
+    setSelected((prev: any) => [...prev, options[index]]);
   };
 
-  const onHandleChipsClick = (event: any) => {
-    const selectedLanguage = selected.filter(
-      (option: any) => option.name === event.target.outerText
-    );
+  const onHandleChipsClick = (id: number) => {
+    const index = selected.findIndex((elem: any) => elem.id === id);
 
-    const language = selected.filter(
-      (option: any) => option.name !== event.target.outerText
-    );
+    const before = selected.slice(0, index);
+    const after = selected.slice(index + 1);
 
-    setSelected([...language]);
-    setOptions((prev: any) => [...prev, ...selectedLanguage]);
+    setSelected([...before, ...after]);
+    setOptions((prev: any) => [...prev, selected[index]]);
   };
 
   const onInputChange = (text: string) => {
+    console.log(sortedOptions);
     setChipsInputValue(text);
   };
 
-  console.log(selected);
-
-  useEffect(() => {
-    const onKeypress = ({ key }: { key: string }) => {
-      if (key === "Escape") {
-        setChipsInputValue("");
-        setIsChipsInputFocused(false);
-      }
-    };
-
-    window.addEventListener("keydown", onKeypress);
-    return () => {
-      window.removeEventListener("keydown", onKeypress);
-    };
-  }, [chipsInputValue]);
+  useKeyPress("Escape", () => {
+    setChipsInputValue("");
+    setIsChipsInputFocused(false);
+  });
 
   return (
     <div className={"ChipsSelect"} onClick={onHandleChipsSelectClick}>
       <div className="ChipsSelect__container">
-        {selected.map(({ name }: any) => (
-          <Chip text={name} onClick={onHandleChipsClick} key={name} />
+        {selected.map(({ id, username }: any) => (
+          <Chip id={id} text={username} onClick={onHandleChipsClick} key={id} />
         ))}
         <ChipsInput
           ref={chipsInputRef}
@@ -96,17 +87,19 @@ export const ChipsSelect = ({
         </div>
       </div>
       <div
+        ref={chipsOptionsRef}
         className={
           isChipsInputFocused
             ? "ChipsSelect__select"
             : "ChipsSelect__select ChipsSelect__select-none"
         }
       >
-        {sortedOptions.map(({ name }: any) => (
+        {sortedOptions.map(({ id, username }: any) => (
           <ChipsOption
-            text={name}
+            id={id}
+            text={username}
             onClick={onHandleChipsOptionClick}
-            key={name}
+            key={username}
           />
         ))}
       </div>

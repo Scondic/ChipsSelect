@@ -1,19 +1,16 @@
 import { useMemo } from "react";
 
-export const applySorting = (data: any, sortBy: string) => {
-  if (!sortBy) {
-    return data;
-  }
-
-  return data.filter(({ name }: { name: string }) =>
-    name.toLowerCase().includes(sortBy.toLowerCase())
-  );
-};
-
-export const useSorting = (data: any, sortBy: string) => {
+export const useSorting = (data: any, field: string, sortBy: string) => {
   const sortedOptions = useMemo(
-    () => applySorting(data, sortBy),
-    [data, sortBy]
+    () =>
+      data.filter((item: any) => {
+        if (sortBy === "") {
+          return item;
+        } else if (item[field].toLowerCase().includes(sortBy.toLowerCase())) {
+          return item;
+        }
+      }),
+    [data, field, sortBy]
   );
 
   return { sortedOptions };
