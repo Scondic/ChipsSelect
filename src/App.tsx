@@ -3,15 +3,8 @@ import { useEffect, useState } from "react";
 import { ChipsSelect } from "@/components";
 
 const App = () => {
-  const [language, setLanguage] = useState([
-    { id: 1, option: "Английский", description: "English" },
-    { id: 2, option: "Русский", description: "Русский" },
-    { id: 3, option: "Немецкий", description: "Deutsch" },
-    { id: 4, option: "Французский", description: "Français" },
-    { id: 5, option: "Японский", description: "日本" },
-  ]);
+  const [language, setLanguage] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState([]);
-
   const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
 
@@ -33,9 +26,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://63e638c57eef5b2233814dc7.mockapi.io/lang")
       .then((response) => response.json())
-      .then((json) => setUsers(json));
+      .then((json) => setLanguage(json));
   }, []);
 
   return (

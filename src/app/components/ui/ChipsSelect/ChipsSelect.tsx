@@ -62,7 +62,6 @@ export const ChipsSelect = ({
   };
 
   const onInputChange = (text: string) => {
-    console.log(sortedOptions);
     setChipsInputValue(text);
   };
 
@@ -95,15 +94,22 @@ export const ChipsSelect = ({
             : "ChipsSelect__select ChipsSelect__select-none"
         }
       >
-        {sortedOptions.map(({ id, option, description }: any) => (
+        {sortedOptions.length ? (
+          sortedOptions.map(({ id, option, description }: any) => (
+            <ChipsOption
+              id={id}
+              key={id}
+              option={option}
+              description={description}
+              onClick={onHandleChipsOptionClick}
+            />
+          ))
+        ) : (
           <ChipsOption
-            id={id}
-            key={id}
-            option={option}
-            description={description}
-            onClick={onHandleChipsOptionClick}
+            option={"Нет данных"}
+            description={"Проверьте передаваемые параметры"}
           />
-        ))}
+        )}
       </div>
     </div>
   );
