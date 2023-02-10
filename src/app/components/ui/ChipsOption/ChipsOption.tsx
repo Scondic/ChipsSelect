@@ -2,15 +2,21 @@ import "./ChipsOption.css";
 
 export interface ChipsOptionProps {
   id: number;
-  text: string;
+  option: string;
+  description: string;
   onClick: (event: any) => void;
 }
 
-export const ChipsOption = ({ id, text, onClick }: ChipsOptionProps) => {
+export const ChipsOption = ({
+  id,
+  option,
+  description,
+  onClick,
+}: ChipsOptionProps) => {
   return (
-    <div className="ChipsSelect__option" key={text} onClick={() => onClick(id)}>
-      <div className="ChipsSelect__option-text">{text}</div>
-      <div className="ChipsSelect__option-description">{text}</div>
+    <div className="ChipsSelect__option" key={id} onClick={() => onClick(id)}>
+      <div className="ChipsSelect__option-text">{option}</div>
+      <div className="ChipsSelect__option-description">{description}</div>
     </div>
   );
 };

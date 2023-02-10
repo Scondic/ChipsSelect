@@ -6,7 +6,7 @@ import { useKeyPress, useSorting } from "@/hooks";
 import "./ChipsSelect.css";
 
 export interface ChipsSelectProps {
-  sort: string;
+  sort?: string;
   selected: any;
   setSelected: (prev: any) => void;
   options: any;
@@ -22,11 +22,12 @@ export const ChipsSelect = ({
   setOptions,
   placeholder,
 }: PropsWithChildren<ChipsSelectProps>) => {
+  const optionSort = sort ? sort : "options";
   const chipsInputRef = useRef<HTMLInputElement>(null);
   const chipsOptionsRef = useRef<HTMLDivElement>(null);
   const [isChipsInputFocused, setIsChipsInputFocused] = useState(false);
   const [chipsInputValue, setChipsInputValue] = useState("");
-  const { sortedOptions } = useSorting(options, sort, chipsInputValue);
+  const { sortedOptions } = useSorting(options, optionSort, chipsInputValue);
 
   const onHandleChipsSelectClick = () => {
     if (chipsInputRef.current) {
@@ -73,8 +74,8 @@ export const ChipsSelect = ({
   return (
     <div className={"ChipsSelect"} onClick={onHandleChipsSelectClick}>
       <div className="ChipsSelect__container">
-        {selected.map(({ id, username }: any) => (
-          <Chip id={id} text={username} onClick={onHandleChipsClick} key={id} />
+        {selected.map(({ id, option }: any) => (
+          <Chip id={id} key={id} text={option} onClick={onHandleChipsClick} />
         ))}
         <ChipsInput
           ref={chipsInputRef}
@@ -94,12 +95,13 @@ export const ChipsSelect = ({
             : "ChipsSelect__select ChipsSelect__select-none"
         }
       >
-        {sortedOptions.map(({ id, username }: any) => (
+        {sortedOptions.map(({ id, option, description }: any) => (
           <ChipsOption
             id={id}
-            text={username}
+            key={id}
+            option={option}
+            description={description}
             onClick={onHandleChipsOptionClick}
-            key={username}
           />
         ))}
       </div>

@@ -40,6 +40,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-flow: wrap;
+  gap: 20px;
 
   width: 340px;
   margin: 0 auto;

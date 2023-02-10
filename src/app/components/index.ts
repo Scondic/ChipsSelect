@@ -1,5 +1,3 @@
-export type { OptionType } from "@/components/types";
-
 export { AngleDown } from "@/components/ui/Icons/AngleDown";
 export { Times } from "@/components/ui/Icons/Times";
 
