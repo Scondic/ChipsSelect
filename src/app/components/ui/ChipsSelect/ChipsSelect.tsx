@@ -22,7 +22,7 @@ export const ChipsSelect = ({
   setOptions,
   placeholder,
 }: PropsWithChildren<ChipsSelectProps>) => {
-  const optionSort = sort ? sort : "options";
+  const optionSort = sort ? sort : "option";
   const chipsInputRef = useRef<HTMLInputElement>(null);
   const chipsOptionsRef = useRef<HTMLDivElement>(null);
   const [isChipsInputFocused, setIsChipsInputFocused] = useState(false);
