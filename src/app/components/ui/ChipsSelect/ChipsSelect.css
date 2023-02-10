@@ -19,7 +19,7 @@
   flex-flow: wrap;
 
   width: inherit;
-  padding: calc(var(--ui-padding) / 2);
+  padding: 10px 30px 10px 10px;
 
   border: 1px solid var(--ui-gray-100);
   border-radius: var(--ui-border__size);

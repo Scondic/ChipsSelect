@@ -1,4 +1,5 @@
 .ChipsInput {
   border: none;
   outline: none;
+  max-width: 8rem;
 }

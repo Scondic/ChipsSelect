@@ -1,26 +1,21 @@
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
 import { useSorting } from "@/hooks/useSorting";
-import {
-  AngleDown,
-  Chip,
-  ChipsInput,
-  ChipsOption,
-} from "@/components";
+import { AngleDown, Chip, ChipsInput, ChipsOption } from "@/components";
 
 import "./ChipsSelect.css";
 
 export interface ChipsSelectProps {
-  value: any;
-  onChange: (prev: any) => void;
+  selected: any;
+  setSelected: (prev: any) => void;
   options: any;
   setOptions: (prev: any) => void;
   placeholder: string;
 }
 
 export const ChipsSelect = ({
-  value,
-  onChange,
+  selected,
+  setSelected,
   options,
   setOptions,
   placeholder,
@@ -46,27 +41,29 @@ export const ChipsSelect = ({
     );
 
     setOptions([...language]);
-    onChange((prev: any) => [...prev, ...selectedLanguage]);
+    setSelected((prev: any) => [...prev, ...selectedLanguage]);
 
     chipsInputRef.current!.value = "";
   };
 
   const onHandleChipsClick = (event: any) => {
-    const selectedLanguage = value.filter(
+    const selectedLanguage = selected.filter(
       (option: any) => option.name === event.target.outerText
     );
 
-    const language = value.filter(
+    const language = selected.filter(
       (option: any) => option.name !== event.target.outerText
     );
 
-    onChange([...language]);
+    setSelected([...language]);
     setOptions((prev: any) => [...prev, ...selectedLanguage]);
   };
 
   const onInputChange = (text: string) => {
     setChipsInputValue(text);
   };
+
+  console.log(selected);
 
   useEffect(() => {
     const onKeypress = ({ key }: { key: string }) => {
@@ -85,12 +82,13 @@ export const ChipsSelect = ({
   return (
     <div className={"ChipsSelect"} onClick={onHandleChipsSelectClick}>
       <div className="ChipsSelect__container">
-        {value.map(({ name }: any) => (
+        {selected.map(({ name }: any) => (
           <Chip text={name} onClick={onHandleChipsClick} key={name} />
         ))}
         <ChipsInput
           ref={chipsInputRef}
           onInputChange={onInputChange}
+          isSelected={selected}
           placeholder={placeholder}
         />
         <div className="ChipsSelect__action">
