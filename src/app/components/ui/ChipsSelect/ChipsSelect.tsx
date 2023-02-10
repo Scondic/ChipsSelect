@@ -37,11 +37,6 @@ export const ChipsSelect = ({
   };
 
   const onHandleChipsOptionClick = (id: number) => {
-    // TODO: Костыль, но зато быстрый.
-    // Вызов обновления стейта с языками
-    chipsInputRef.current!.value = " ";
-    chipsInputRef.current!.value = "";
-
     const index = options.findIndex((elem: any) => elem.id === id);
 
     const before = options.slice(0, index);
