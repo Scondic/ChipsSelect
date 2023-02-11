@@ -13,7 +13,6 @@ specifiers:
 dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  vite-tsconfig-paths: 4.0.5_typescript@4.9.5
 
 devDependencies:
   '@types/react': 18.0.27
@@ -21,6 +20,7 @@ devDependencies:
   '@vitejs/plugin-react': 3.1.0_vite@4.1.1
   typescript: 4.9.5
   vite: 4.1.1
+  vite-tsconfig-paths: 4.0.5_typescript@4.9.5
 
 packages:
 
@@ -584,6 +584,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
 
   /electron-to-chromium/1.4.292:
     resolution: {integrity: sha512-ESWOSyJy5odDlE8wvh5NNAMORv4r6assPwIPGHEMWrWD0SONXcG/xT+9aD9CQyeRwyYDPo6dJT4Bbeg5uevVQQ==}
@@ -653,7 +654,7 @@ packages:
 
   /globrex/0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-    dev: false
+    dev: true
 
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
@@ -710,6 +711,7 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+    dev: true
 
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
@@ -821,12 +823,13 @@ packages:
         optional: true
     dependencies:
       typescript: 4.9.5
-    dev: false
+    dev: true
 
   /typescript/4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /update-browserslist-db/1.0.10_browserslist@4.21.5:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
@@ -848,7 +851,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - typescript
-    dev: false
+    dev: true
 
   /vite/4.1.1:
     resolution: {integrity: sha512-LM9WWea8vsxhr782r9ntg+bhSFS06FJgCvvB0+8hf8UWtvaiDagKYWXndjfX6kGl74keHJUcpzrQliDXZlF5yg==}
