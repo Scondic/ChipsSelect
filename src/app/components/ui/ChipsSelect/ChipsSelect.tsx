@@ -4,6 +4,7 @@ import { AngleDown, Chip, ChipsInput, ChipsOption } from "@/components";
 import { useKeyPress, useSorting } from "@/hooks";
 
 import "./ChipsSelect.css";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 export interface ChipsSelectProps {
   sort?: string;
@@ -63,6 +64,13 @@ export const ChipsSelect = ({
   useKeyPress("Escape", () => {
     setChipsInputValue("");
     setIsChipsInputFocused(false);
+  });
+
+  useOutsideClick({
+    ref: chipsOptionsRef,
+    handler: () => {
+      setIsChipsInputFocused(false);
+    },
   });
 
   return (
