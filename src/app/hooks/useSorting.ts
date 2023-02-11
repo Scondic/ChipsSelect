@@ -1,6 +1,12 @@
 import { useMemo } from "react";
 
-export const useSorting = (data: any, field: string, sortBy: string) => {
+export interface UseSortingProps {
+  data: any;
+  field: string;
+  sortBy: string;
+}
+
+export const useSorting = ({ data, field, sortBy }: UseSortingProps) => {
   const sortedOptions = useMemo(
     () =>
       data.filter((item: any) => {

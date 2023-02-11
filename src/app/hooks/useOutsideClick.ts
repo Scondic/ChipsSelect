@@ -2,20 +2,20 @@ import { useEffect } from "react";
 
 export interface UseOutsideClickProps {
   ref: React.RefObject<HTMLElement>;
-  handler: (e: Event) => void;
+  callback: (e: Event) => void;
   enabled?: boolean;
 }
 
 export function useOutsideClick({
   ref,
-  handler,
+  callback,
   enabled = true,
 }: UseOutsideClickProps) {
   useEffect(() => {
     if (!enabled) return;
 
     const onMouseUp = (event: MouseEvent) => {
-      handler(event);
+      callback(event);
     };
 
     document.addEventListener("mouseup", onMouseUp, true);
@@ -23,5 +23,5 @@ export function useOutsideClick({
     return () => {
       document.removeEventListener("mouseup", onMouseUp, true);
     };
-  }, [ref, handler, enabled]);
+  }, [ref, callback, enabled]);
 }

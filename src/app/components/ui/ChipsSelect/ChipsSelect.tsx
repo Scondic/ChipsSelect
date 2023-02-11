@@ -28,7 +28,27 @@ export const ChipsSelect = ({
   const chipsOptionsRef = useRef<HTMLDivElement>(null);
   const [isChipsInputFocused, setIsChipsInputFocused] = useState(false);
   const [chipsInputValue, setChipsInputValue] = useState("");
-  const { sortedOptions } = useSorting(options, optionSort, chipsInputValue);
+
+  useKeyPress({
+    keyString: "Escape",
+    callback: () => {
+      setChipsInputValue("");
+      setIsChipsInputFocused(false);
+    },
+  });
+
+  useOutsideClick({
+    ref: chipsOptionsRef,
+    callback: () => {
+      setIsChipsInputFocused(false);
+    },
+  });
+
+  const { sortedOptions } = useSorting({
+    data: options,
+    field: optionSort,
+    sortBy: chipsInputValue,
+  });
 
   const onHandleChipsSelectClick = () => {
     if (chipsInputRef.current) {
@@ -60,18 +80,6 @@ export const ChipsSelect = ({
   const onInputChange = (text: string) => {
     setChipsInputValue(text);
   };
-
-  useKeyPress("Escape", () => {
-    setChipsInputValue("");
-    setIsChipsInputFocused(false);
-  });
-
-  useOutsideClick({
-    ref: chipsOptionsRef,
-    handler: () => {
-      setIsChipsInputFocused(false);
-    },
-  });
 
   return (
     <div className={"ChipsSelect"} onClick={onHandleChipsSelectClick}>

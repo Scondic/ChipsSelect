@@ -1,9 +1,14 @@
 import { useEffect } from "react";
 
-export const useKeyPress = (keyInfo: string, callback: () => void) => {
+export interface UseKeyPressProps {
+  keyString: string;
+  callback: () => void;
+}
+
+export const useKeyPress = ({ keyString, callback }: UseKeyPressProps) => {
   useEffect(() => {
     const onKeypress = ({ key }: { key: string }) => {
-      if (key === keyInfo) {
+      if (key === keyString) {
         callback();
       }
     };
